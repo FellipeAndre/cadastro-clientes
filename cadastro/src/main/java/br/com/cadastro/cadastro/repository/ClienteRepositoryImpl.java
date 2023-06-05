@@ -18,4 +18,5 @@ public interface ClienteRepositoryImpl extends JpaRepository<Cliente, Integer> {
 	        "INNER JOIN telefone t ON c.id_cliente = t.id_cliente " +
 	        "WHERE c.id_cliente = :id_cliente", nativeQuery = true)
 	public Cliente bringCustomerData(@Param("id_cliente") Integer id);
+	
 }
