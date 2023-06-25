@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.cadastro.cadastro.dto.DadosCliente;
 import br.com.cadastro.cadastro.dto.DadosClienteDTO;
 import br.com.cadastro.cadastro.entity.Cliente;
 import br.com.cadastro.cadastro.repository.ClienteRepositoryImpl;
@@ -54,15 +55,15 @@ public class ClienteController {
 		return dadosDoCliente;
 	}
 	
-	@GetMapping("/dadosCliente")
+	@GetMapping("/dadosCliente/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public DadosClienteDTO findByDadosDoClientePorId(@RequestBody DadosClienteDTO id) {
+	public DadosCliente findByDadosDoClientePorId(@PathVariable Integer id) {
 		
-	DadosClienteDTO dadosDoCliente = this.service.buscarDadosPorId(id);
+	DadosCliente dadosDoCliente = this.service.buscarDadosDoClientePorId(id);
 	
 	if(Objects.isNull(dadosDoCliente)) {
 		
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Dados não encontrado !!!");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Dados não encontrado do cliente !!!");
 	}
 		return dadosDoCliente;
 	}
