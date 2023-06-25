@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,10 +23,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClienteServiceImpl implements ClienteService {
 
+	@Autowired
 	private ClienteRepositoryImpl repositoryCliente;
 
+	@Autowired
 	private EnderecoRepositoryImpl EnderecoRepository;
 
+	@Autowired
 	private TelefoneRepositoryImpl TelefoneRepository;
 
 	private DadosCliente dadosCliente = new DadosCliente();
