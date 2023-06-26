@@ -1,4 +1,4 @@
-# cadastro-clientes
+# Cadastro-Clientes
 
 Sejam Bem vindos ao projeto de Cadastro de Clientes.
 
@@ -7,7 +7,7 @@ Sejam Bem vindos ao projeto de Cadastro de Clientes.
 
  Essa é uma APIREST utilizando o acrônimo CRUD para realização dos end-points criados, mas também um projeto que estou aprimorando conforme os Cursos realizados. Iniciando o projeto abordei conceitos extraidos dos Cursos da UDEMY e ALURA.
 
- # 1 etapa
+ # Etapa 1
 
  1° Configuração das dependencias no POM com springBoot ->(Web, Data jpa, Validation),  Junit, mySql, Hibernate.
 
