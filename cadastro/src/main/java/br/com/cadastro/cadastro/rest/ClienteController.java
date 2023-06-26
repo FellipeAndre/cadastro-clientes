@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.cadastro.cadastro.dto.DadosCliente;
+import br.com.cadastro.cadastro.entity.CadastroDoCliente;
 import br.com.cadastro.cadastro.entity.Cliente;
 import br.com.cadastro.cadastro.repository.ClienteRepositoryImpl;
+import br.com.cadastro.cadastro.serviceImpl.CadastroClienteServiceImpl;
 import br.com.cadastro.cadastro.serviceImpl.ClienteServiceImpl;
 
 @RestController
@@ -27,10 +29,14 @@ public class ClienteController {
 	ClienteRepositoryImpl clientes;
 	
 	private ClienteServiceImpl service;
+	
+	private CadastroClienteServiceImpl serviceCliente;
 
-	public ClienteController(ClienteRepositoryImpl repository, ClienteServiceImpl service) {
+	public ClienteController(ClienteRepositoryImpl repository, ClienteServiceImpl service, 
+			CadastroClienteServiceImpl serviceC) {
 		this.clientes = repository;
 		this.service = service;
+		this.serviceCliente = serviceC;
 	}
 	
 	@PostMapping
@@ -57,9 +63,9 @@ public class ClienteController {
 	
 	@GetMapping("/dadosCliente/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public DadosCliente findByDadosDoClientePorId(@PathVariable(name = "id") Integer id) {
+	public CadastroDoCliente findByDadosDoClientePorId(@PathVariable(name = "id") Integer id) {
 		
-	DadosCliente dadosDoCliente = this.service.buscarDadosDoClientePorId(id);
+	CadastroDoCliente dadosDoCliente = this.serviceCliente.save(id);
 	
 		return dadosDoCliente;
 	}

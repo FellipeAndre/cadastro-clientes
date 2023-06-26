@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -20,11 +21,13 @@ import br.com.cadastro.cadastro.entity.Endereco;
 import br.com.cadastro.cadastro.entity.Telefone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CadastroDoCliente {
 	
 	@Id
@@ -38,10 +41,10 @@ public class CadastroDoCliente {
 	@Column(name = "status")
 	private String status;
 	
-	@Column(name = "idCliente")
+	@JoinColumn
 	@JsonIgnore
-	@OneToMany
-	private Integer id_Cliente;
+	@OneToOne
+	private Cliente id_Cliente;
 	
 	@Column(name = "nome")
 	private String nome;
@@ -59,7 +62,7 @@ public class CadastroDoCliente {
 	@Column(name = "data_nasc")
 	private Date data_nasc;
 	
-	@Column(name = "idEndereco")
+	@JoinColumn
 	@JsonIgnore
 	@ManyToOne
 	private Endereco id_endereco;
@@ -79,9 +82,9 @@ public class CadastroDoCliente {
 	@Column(name = "pais")
 	private String pais;
 	
-	@Column(name = "idTelefone")
+	@JoinColumn
 	@JsonIgnore
-	@OneToOne
+	@ManyToOne
 	private Telefone id_telefone;
 	
 	@Column(name = "tipo")

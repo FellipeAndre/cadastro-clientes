@@ -9,9 +9,11 @@ C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\rest\TelefoneController.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\service\ClienteService.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\repository\CadastroClienteRepositoryImpl.java
+C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\service\CadastroCliente.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\entity\Endereco.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\entity\Telefone.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\dto\DadosCliente.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\entity\Cliente.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\repository\TelefoneRepositoryImpl.java
 C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\rest\ClienteController.java
+C:\Users\Felipe Andre\workspaceCurso\cadastro-clientes\cadastro\src\main\java\br\com\cadastro\cadastro\serviceImpl\CadastroClienteServiceImpl.java
