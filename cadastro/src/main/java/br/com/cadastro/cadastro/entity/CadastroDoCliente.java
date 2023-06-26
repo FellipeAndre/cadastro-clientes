@@ -7,9 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.cadastro.cadastro.entity.Endereco;
 import br.com.cadastro.cadastro.entity.Telefone;
@@ -30,55 +35,59 @@ public class CadastroDoCliente {
 	@Column(name = "data_inclusao" )
 	private Date data_inclusao;
 	
-	@Column
+	@Column(name = "status")
 	private String status;
 	
-	@Column
-	@OneToOne
+	@Column(name = "idCliente")
+	@JsonIgnore
+	@OneToMany
 	private Integer id_Cliente;
 	
-	@Column
+	@Column(name = "nome")
 	private String nome;
 	
-	@Column
+	@Column(name = "sexo")
 	private String sexo;
 	
-	@Column
+	@Column(name = "email")
 	private String email;
 	
-	@Column
+	@Column(name = "cof")
+	@CPF
 	private String cpf;
 	
-	@Column
+	@Column(name = "data_nasc")
 	private Date data_nasc;
 	
-	@Column
-	@OneToOne
+	@Column(name = "idEndereco")
+	@JsonIgnore
+	@ManyToOne
 	private Endereco id_endereco;
 	
-	@Column
+	@Column(name = "rua")
 	private String rua;
 	
-	@Column
+	@Column(name = "bairro")
 	private String bairro;
 	
-	@Column
+	@Column(name = "cidade")
 	private String cidade;
 	
-	@Column
+	@Column(name = "estado")
 	private String estado;
 	
-	@Column
-	private String Pais;
+	@Column(name = "pais")
+	private String pais;
 	
-	@Column
-	@OneToMany
+	@Column(name = "idTelefone")
+	@JsonIgnore
+	@OneToOne
 	private Telefone id_telefone;
 	
-	@Column
+	@Column(name = "tipo")
 	private String tipo;
 	
-	@Column
+	@Column(name = "numero")
 	private String numero;
 	
 
