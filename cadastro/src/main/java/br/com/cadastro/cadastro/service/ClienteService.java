@@ -7,8 +7,8 @@ public interface ClienteService {
 	
 	public Cliente findByIdCliente(Integer id);
 
-   public DadosCliente buscarDadosDoClientePorId(Integer id);
+    public DadosCliente buscarDadosDoClientePorId(Integer id);
    
-   public DadosCliente excluirDadosDoCliente(Integer id);
+    public DadosCliente excluirDadosDoCliente(Integer id);
 }
 

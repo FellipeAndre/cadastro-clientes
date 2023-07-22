@@ -2,8 +2,8 @@ package br.com.cadastro.cadastro.service;
 
 import br.com.cadastro.cadastro.entity.CadastroDoCliente;
 
-public interface CadastroCliente {
+public interface CadastroClienteService {
 	
-	public CadastroDoCliente save(Integer id);
+	public Integer save(CadastroDoCliente cliente);
 
 }

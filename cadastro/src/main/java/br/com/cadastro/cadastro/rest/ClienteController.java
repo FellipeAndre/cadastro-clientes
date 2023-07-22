@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.cadastro.cadastro.dto.DadosCliente;
 import br.com.cadastro.cadastro.entity.CadastroDoCliente;
 import br.com.cadastro.cadastro.entity.Cliente;
 import br.com.cadastro.cadastro.repository.ClienteRepositoryImpl;
@@ -28,6 +27,7 @@ public class ClienteController {
 	@Autowired
 	ClienteRepositoryImpl clientes;
 	
+	@SuppressWarnings("unused")
 	private ClienteServiceImpl service;
 	
 	private CadastroClienteServiceImpl serviceCliente;
@@ -41,11 +41,9 @@ public class ClienteController {
 	
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Integer save(@RequestBody Cliente cliente) {
+	public Integer save(@RequestBody CadastroDoCliente cliente) {
 		
-		this.clientes.save(cliente);
-		
-		return cliente.getIdCliente();
+		return this.serviceCliente.save(cliente);
 	}
 	
 	@GetMapping("/{id}")
@@ -61,6 +59,7 @@ public class ClienteController {
 		return dadosDoCliente.get();
 	}
 	
+	/*
 	@GetMapping("/dadosCliente/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	public CadastroDoCliente findByDadosDoClientePorId(@PathVariable(name = "id") Integer id) {
@@ -69,6 +68,7 @@ public class ClienteController {
 	
 		return dadosDoCliente;
 	}
+	*/
 	
 /** No método deletar recebendo o ID do cliente teremos que encontra o Endereco associado
  * 

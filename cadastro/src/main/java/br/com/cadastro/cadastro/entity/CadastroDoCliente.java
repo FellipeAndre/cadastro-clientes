@@ -42,7 +42,6 @@ public class CadastroDoCliente {
 	private String status;
 	
 	@JoinColumn
-	@JsonIgnore
 	@OneToOne
 	private Cliente id_Cliente;
 	
@@ -63,7 +62,6 @@ public class CadastroDoCliente {
 	private Date data_nasc;
 	
 	@JoinColumn
-	@JsonIgnore
 	@ManyToOne
 	private Endereco id_endereco;
 	
@@ -83,7 +81,6 @@ public class CadastroDoCliente {
 	private String pais;
 	
 	@JoinColumn
-	@JsonIgnore
 	@ManyToOne
 	private Telefone id_telefone;
 	
