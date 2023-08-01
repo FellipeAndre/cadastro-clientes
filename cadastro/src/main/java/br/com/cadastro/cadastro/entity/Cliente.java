@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -33,6 +35,10 @@ public class Cliente {
     @Column(name = "cpf", length = 11)
     private String cpf;
 
+    @JoinColumn(name = "idCadastro")
+    @OneToOne
+    private CadastroDoCliente idcadastro;
+    
 	public Integer getIdCliente() {
 		return idCliente;
 	}

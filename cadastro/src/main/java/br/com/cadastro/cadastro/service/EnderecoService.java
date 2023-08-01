@@ -1,8 +1,10 @@
 package br.com.cadastro.cadastro.service;
 
+import org.springframework.http.ResponseEntity;
+
 import br.com.cadastro.cadastro.entity.Endereco;
 
 public interface EnderecoService {
 
-	void save(Endereco endereco);
+	ResponseEntity<Endereco> getSalvarEndereco(Endereco endereco);
 }

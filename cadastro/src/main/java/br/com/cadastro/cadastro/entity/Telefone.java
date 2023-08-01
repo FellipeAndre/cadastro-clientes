@@ -2,7 +2,6 @@ package br.com.cadastro.cadastro.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +10,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "telefone")
 public class Telefone {
 	
@@ -36,10 +39,10 @@ public class Telefone {
 	@Column(name = "numero")
 	private String numero;
 	
-	@ManyToOne
-	@JoinColumn(name ="idCliente")
 	@JsonIgnore
-	private Cliente id_cliente;
+	@JoinColumn(name = "idCadastro")
+    @ManyToOne
+    private CadastroDoCliente idcadastro;
 
 	public Integer getIdTelefone() {
 		return idTelefone;
@@ -65,18 +68,10 @@ public class Telefone {
 		this.numero = numero;
 	}
 
-	public Cliente getId_cliente() {
-		return id_cliente;
-	}
-
-	public void setId_cliente(Cliente id_cliente) {
-		this.id_cliente = id_cliente;
-	}
 
 	@Override
 	public String toString() {
-		return "Telefone [idTelefone=" + idTelefone + ", tipo=" + tipo + ", numero=" + numero + ", id_cliente="
-				+ id_cliente + "]";
+		return "Telefone [idTelefone=" + idTelefone + ", tipo=" + tipo + ", numero=" + numero + "]";
 	}
 	
 	

@@ -7,25 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.cadastro.cadastro.entity.Endereco;
-import br.com.cadastro.cadastro.entity.Telefone;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class CadastroDoCliente {
@@ -35,60 +33,50 @@ public class CadastroDoCliente {
 	@Column(unique = true)
 	private Integer idCadastro;
 	
-	@Column(name = "data_inclusao" )
-	private Date data_inclusao;
-	
-	@Column(name = "status")
-	private String status;
-	
-	@JoinColumn
-	@OneToOne
-	private Cliente id_Cliente;
-	
-	@Column(name = "nome")
+	@Column(name = "nome", nullable = false)
 	private String nome;
 	
-	@Column(name = "sexo")
+	@Column(name = "data_inclusao", nullable = false)
+	@JsonFormat(pattern="dd-MM-yyyy")
+	private Date data_inclusao;
+	
+	@Column(name = "status", nullable = false)
+	private String status;
+	
+	@Column(name = "sexo", nullable = false)
 	private String sexo;
 	
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 	
-	@Column(name = "cof")
+	@Column(name = "cpf", unique = true)
 	@CPF
 	private String cpf;
 	
-	@Column(name = "data_nasc")
-	private Date data_nasc;
+	@Column(name = "data_nasc", nullable = false)
+	@JsonFormat(pattern="dd-MM-yyyy")
+	private String data_nasc;
 	
-	@JoinColumn
-	@ManyToOne
-	private Endereco id_endereco;
-	
-	@Column(name = "rua")
+	@Column(name = "rua", nullable = false)
 	private String rua;
 	
-	@Column(name = "bairro")
+	@Column(name = "bairro",nullable = false)
 	private String bairro;
 	
-	@Column(name = "cidade")
+	@Column(name = "cidade", nullable = false)
 	private String cidade;
 	
-	@Column(name = "estado")
+	@Column(name = "estado", nullable = false, length = 2)
 	private String estado;
 	
-	@Column(name = "pais")
+	@Column(name = "pais", nullable = false)
 	private String pais;
-	
-	@JoinColumn
-	@ManyToOne
-	private Telefone id_telefone;
-	
-	@Column(name = "tipo")
-	private String tipo;
 	
 	@Column(name = "numero")
 	private String numero;
+	
+	@Column(name = "tipo")
+	private String tipo;
 	
 
 }

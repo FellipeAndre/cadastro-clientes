@@ -11,9 +11,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "endereco")
 public class Endereco {
 
@@ -41,11 +44,10 @@ public class Endereco {
 	@Column(name = "estado")
 	private String Estado;
 	
-	@OneToOne
-	@JoinColumn(name = "idCliente", unique = true)
-	@NonNull
 	@JsonIgnore
-	private Cliente id_Cliente;
+	@JoinColumn(name = "idCadastro")
+    @OneToOne
+    private CadastroDoCliente idcadastro;
 
 	public Integer getIdEndereco() {
 		return idEndereco;
@@ -87,18 +89,11 @@ public class Endereco {
 		Estado = estado;
 	}
 
-	public Cliente getId_Cliente() {
-		return id_Cliente;
-	}
-
-	public void setId_Cliente(Cliente id_Cliente) {
-		this.id_Cliente = id_Cliente;
-	}
 
 	@Override
 	public String toString() {
 		return "Endereco [idEndereco=" + idEndereco + ", rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade
-				+ ", Estado=" + Estado + ", id_Cliente=" + id_Cliente + "]";
+				+ ", Estado=" + Estado + "]";
 	}
 	
 	
