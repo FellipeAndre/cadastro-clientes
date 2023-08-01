@@ -4,6 +4,6 @@ import br.com.cadastro.cadastro.entity.CadastroDoCliente;
 
 public interface CadastroClienteService {
 	
-	public Integer getSalvarDadosDoCliente(CadastroDoCliente cliente);
+	public Integer getSalvarDadosDoCliente(CadastroDoCliente cadastro);
 
 }

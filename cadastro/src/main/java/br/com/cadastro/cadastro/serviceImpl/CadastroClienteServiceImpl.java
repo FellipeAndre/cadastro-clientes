@@ -38,7 +38,6 @@ public class CadastroClienteServiceImpl implements CadastroClienteService {
 	@Autowired
 	private TelefoneService telefoneService;
 
-	private String mensagemError;
 
 	@Override
 	public Integer getSalvarDadosDoCliente(CadastroDoCliente cliente) {
@@ -50,70 +49,56 @@ public class CadastroClienteServiceImpl implements CadastroClienteService {
 		if (Objects.nonNull(cadastroSalvo)) {
 
 			this.salvarClienteCadastrado(cadastroSalvo);
-			this.salvarEnderecoCadastrado(cadastroSalvo);
-			this.salvarTelefoneCadastrado(cadastroSalvo);
+			
+		}else {
+						
+			this.mensagemDeErros("Erro durante a persistência do Dado na Base !!!");
 		}
 
 		return cadastroSalvo.getIdCadastro();
 	}
 
-	private void mensagemDeErros(String mensagem) {
-
-		throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, mensagem);
-	}
 	
 	private void salvarClienteCadastrado(CadastroDoCliente cadastroSalvo) {
-		
-		Cliente dadosCliente = new Cliente();
 
-		dadosCliente.setNome(cadastroSalvo.getNome());
-		dadosCliente.setCpf(cadastroSalvo.getCpf());
-		dadosCliente.setSexo(cadastroSalvo.getSexo());
-		dadosCliente.setEmail(cadastroSalvo.getEmail());
-		dadosCliente.setIdcadastro(cadastroSalvo);
-
-		ResponseEntity<Cliente> statusCliente = this.clienteService.getSalvarCliente(dadosCliente);
+		ResponseEntity<Cliente> statusCliente = this.clienteService.getSalvarCliente(cadastroSalvo);
 		
-		if (statusCliente.getStatusCode().equals(ResponseEntity.notFound().build())) {
-			this.mensagemError = "Não foi salvo os Dados do Cliente na Base";
-			this.mensagemDeErros(this.mensagemError);
+		if (statusCliente.getStatusCode().equals(HttpStatus.FOUND)) {
+			
+			this.mensagemDeErros("ID encontrado na Base os dados não poderam ser persistidos na base");
+		}else {
+			
+			this.salvarEnderecoCadastrado(cadastroSalvo);
 		}
 	}
 	
 	private void salvarEnderecoCadastrado(CadastroDoCliente cadastroSalvo) {
 		
-		Endereco enderecoCliente = new Endereco();
 
-		enderecoCliente.setBairro(cadastroSalvo.getBairro());
-		enderecoCliente.setCidade(cadastroSalvo.getCidade());
-		enderecoCliente.setRua(cadastroSalvo.getRua());
-		enderecoCliente.setEstado(cadastroSalvo.getEstado());
-		enderecoCliente.setIdcadastro(cadastroSalvo);
-
-		ResponseEntity<Endereco> statusEndereco = this.enderecoService.getSalvarEndereco(enderecoCliente);
+		ResponseEntity<Endereco> statusEndereco = this.enderecoService.getSalvarEndereco(cadastroSalvo);
 		
-		if (statusEndereco.getStatusCode().equals(ResponseEntity.notFound().build())) {
-			this.mensagemError = "Não foi salvo os Dados de Endereço na Base";
-			this.mensagemDeErros(this.mensagemError);
+		if (statusEndereco.getStatusCode().equals(HttpStatus.FOUND)) {
+			
+			this.mensagemDeErros("ID encontrado na Base os dados não poderam ser persistidos na base");
+		}else {
+			
+			this.salvarTelefoneCadastrado(cadastroSalvo);
 		}
 	}
 	
 	private void salvarTelefoneCadastrado(CadastroDoCliente cadastroSalvo) {
 		
-		Telefone telCliente = new Telefone();
-
-		telCliente.setNumero(cadastroSalvo.getNumero());
-		telCliente.setTipo(cadastroSalvo.getTipo());
-		telCliente.setIdcadastro(cadastroSalvo);
-
-		ResponseEntity<Telefone> statusTelefone = this.telefoneService.getSalvarTelefone(telCliente);
+		ResponseEntity<Telefone> statusTelefone = this.telefoneService.getSalvarTelefone(cadastroSalvo);
 		
-		if (statusTelefone.getStatusCode().equals(ResponseEntity.notFound().build())) {
-			this.mensagemError = "Não foi salvo os Dados de Telefone na Base";
-			this.mensagemDeErros(this.mensagemError);
+		if (statusTelefone.getStatusCode().equals(HttpStatus.FOUND)) {
+			
+			this.mensagemDeErros("ID encontrado na Base os dados não poderam ser persistidos na base");
 		}
 	}
 	
-	
+	private void mensagemDeErros(String mensagem) {
+
+		throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, mensagem);
+	}
 
 }

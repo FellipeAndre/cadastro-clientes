@@ -55,7 +55,7 @@ public class CadastroDoCliente {
 	
 	@Column(name = "data_nasc", nullable = false)
 	@JsonFormat(pattern="dd-MM-yyyy")
-	private String data_nasc;
+	private Date data_nasc;
 	
 	@Column(name = "rua", nullable = false)
 	private String rua;
