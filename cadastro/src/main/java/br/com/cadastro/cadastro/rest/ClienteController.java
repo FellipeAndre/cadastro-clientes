@@ -37,44 +37,4 @@ public class ClienteController {
 		return cadastroCliente.getIdCadastro();
 	}
 	
-	/*
-	@GetMapping("/{id}")
-	@ResponseStatus(value = HttpStatus.OK)
-	public Cliente findByCliente(@PathVariable(name = "id") Integer id) {
-		
-	Optional<Cliente> dadosDoCliente = this.serviceCliente;
-	
-	if(!dadosDoCliente.isPresent()) {
-		
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado !!!");
-	}
-		return dadosDoCliente.get();
-	}
-	*/
-	
-	/*
-	@GetMapping("/dadosCliente/{id}")
-	@ResponseStatus(value = HttpStatus.OK)
-	public CadastroDoCliente findByDadosDoClientePorId(@PathVariable(name = "id") Integer id) {
-		
-	CadastroDoCliente dadosDoCliente = this.serviceCliente.save(id);
-	
-		return dadosDoCliente;
-	}
-	*/
-	
-/** No método deletar recebendo o ID do cliente teremos que encontra o Endereco associado
- * 
- *  a esse cliente e se tiver Telefone associado a ele deletar Também
- *  */	
-	
-/*	
-	@DeleteMapping("/excluir-cliente/{id}")
-	@ResponseStatus(value = HttpStatus.ACCEPTED)
-	public void delete(@PathVariable(value = "id") Integer id) {
-		
-		this.clientes.deleteById(id);
-	}
-	*/
-	
 }

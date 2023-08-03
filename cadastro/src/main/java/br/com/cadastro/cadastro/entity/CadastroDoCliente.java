@@ -30,7 +30,7 @@ public class CadastroDoCliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true)
+	@Column(name = "ID_CADASTRO",unique = true)
 	private Integer idCadastro;
 	
 	@Column(name = "nome", nullable = false)
@@ -53,7 +53,7 @@ public class CadastroDoCliente {
 	@CPF
 	private String cpf;
 	
-	@Column(name = "data_nasc", nullable = false)
+	@Column(name = "data_de_nascimento", nullable = false)
 	@JsonFormat(pattern="dd-MM-yyyy")
 	private Date data_nasc;
 	
