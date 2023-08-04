@@ -1,5 +1,7 @@
 package br.com.cadastro.cadastro.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,14 +22,6 @@ import lombok.Setter;
 @Table(name = "telefone")
 public class Telefone {
 	
-	/* 	IDTELEFONE INT PRIMARY KEY AUTO_INCREMENT, 
-	TIPO ENUM('RES','COM','CEL') NOT NULL,
-	NUMERO VARCHAR(10) NOT NULL,
-	ID_CLIENTE INT,
-
-	FOREIGN KEY(ID_CLIENTE)
-	REFERENCES CLIENTE(IDCLIENTE)*/
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@JsonIgnore
@@ -39,34 +33,10 @@ public class Telefone {
 	@Column(name = "numero")
 	private String numero;
 	
+	@ManyToOne
+	@JoinColumn(name ="idCliente")
 	@JsonIgnore
-	@JoinColumn(name = "idCadastro")
-    @ManyToOne
-    private CadastroDoCliente idcadastro;
-
-	public Integer getIdTelefone() {
-		return idTelefone;
-	}
-
-	public void setIdTelefone(Integer idTelefone) {
-		this.idTelefone = idTelefone;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+	private Cliente id_cliente;
 
 
 	@Override

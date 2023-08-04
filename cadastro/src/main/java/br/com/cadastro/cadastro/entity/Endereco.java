@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
@@ -20,13 +21,6 @@ import lombok.Setter;
 @Table(name = "endereco")
 public class Endereco {
 
-	/*IDENDERECO INT PRIMARY KEY AUTO_INCREMENT, 
-	RUA VARCHAR(30) NOT NULL,
-	BAIRRO VARCHAR(30) NOT NULL,
-	CIDADE VARCHAR(30) NOT NULL,
-	ESTADO CHAR(2) NOT NULL,
-	ID_CLIENTE INT UNIQUE,*/
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@JsonIgnore
@@ -44,51 +38,11 @@ public class Endereco {
 	@Column(name = "estado")
 	private String Estado;
 	
+	@OneToOne
+	@JoinColumn(name = "idCliente", unique = true)
+	@NonNull
 	@JsonIgnore
-	@JoinColumn(name = "idCadastro")
-    @OneToOne
-    private CadastroDoCliente idcadastro;
-
-	public Integer getIdEndereco() {
-		return idEndereco;
-	}
-
-	public void setIdEndereco(Integer id) {
-		this.idEndereco = id;
-	}
-
-	public String getRua() {
-		return rua;
-	}
-
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return Estado;
-	}
-
-	public void setEstado(String estado) {
-		Estado = estado;
-	}
-
+	private Cliente id_Cliente;
 
 	@Override
 	public String toString() {
