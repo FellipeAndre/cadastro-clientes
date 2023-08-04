@@ -38,7 +38,6 @@ public class Telefone {
 	@JsonIgnore
 	private Cliente id_cliente;
 
-
 	@Override
 	public String toString() {
 		return "Telefone [idTelefone=" + idTelefone + ", tipo=" + tipo + ", numero=" + numero + "]";

@@ -16,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.cadastro.cadastro.entity.Cliente;
 import br.com.cadastro.cadastro.repository.ClienteRepositoryImpl;
-import lombok.Value;
 
 @RestController
 @RequestMapping("/api/cadastrar-cliente")
@@ -34,7 +33,7 @@ public class ClienteController {
 	 * @param cliente
 	 * @return ID do Cliente
 	 * 
-	 * Método do tipo POST responsável por salvar os dados do Cliente
+	 * Método com Requisição POST responsável por salvar os dados do Cliente
 	 * 
 	 */
 	
@@ -52,7 +51,7 @@ public class ClienteController {
 	 * @param id
 	 * @return 
 	 * 
-	 * Método do tipo GET responsável por buscar o cliente pelo sei id,
+	 * Método com a Requisição GET responsável por buscar o cliente pelo sei id,
 	 * caso não encontrado retornará um status https 404.
 	 *  
 	 */
@@ -71,7 +70,7 @@ public class ClienteController {
 	}
 	
 	/***
-	 * Método do tipo PUT  responsável por atualizar os dados do Cliente recebido no corpo do
+	 * Método com a Requisição PUT  responsável por atualizar os dados do Cliente recebido no corpo do
 	 * JSON.
 	 * Caso o Cliente não seja encontrado retornará um HTTP 404
 	 * 
