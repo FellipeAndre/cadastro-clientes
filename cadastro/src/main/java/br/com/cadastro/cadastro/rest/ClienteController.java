@@ -60,13 +60,10 @@ public class ClienteController {
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public Cliente findByCliente(@PathVariable Integer id) {
 		
-	Optional<Cliente> clienteEncontrado = this.clientes.findById(id);
+	Cliente clienteEncontrado = this.clientes.findById(id)
+			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	
-	if(!clienteEncontrado.isPresent()) {
-	throw  new ResponseStatusException(HttpStatus.NOT_FOUND);
-	}
-			
-		return clienteEncontrado.get();
+		return clienteEncontrado;
 	}
 	
 	/***
