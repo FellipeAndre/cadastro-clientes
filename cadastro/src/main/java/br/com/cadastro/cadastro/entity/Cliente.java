@@ -1,12 +1,13 @@
 package br.com.cadastro.cadastro.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -33,6 +34,14 @@ public class Cliente {
     
     @Column(name = "cpf", length = 11)
     private String cpf;
+    
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name = "id_endereco")
+    private Endereco idEndereco;
+    
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name = "id_telefone")
+    private Telefone idTelefone;
 
 	@Override
 	public String toString() {

@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.cadastro.cadastro.entity.Cliente;
 import br.com.cadastro.cadastro.repository.ClienteRepositoryImpl;
+import br.com.cadastro.cadastro.service.ClienteService;
 
 @RestController
 @RequestMapping("/api/cadastrar-cliente")
@@ -23,9 +24,12 @@ public class ClienteController {
 	
 	@Autowired
 	ClienteRepositoryImpl clientes;
+	
+	ClienteService service;
 
-	public ClienteController(ClienteRepositoryImpl repository) {
+	public ClienteController(ClienteRepositoryImpl repository, ClienteService service) {
 		this.clientes = repository;
+		this.service = service;
 	}
 	
 	/***
@@ -41,9 +45,9 @@ public class ClienteController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Integer save(@RequestBody Cliente cliente) {
 		
-		this.clientes.save(cliente);
+		Cliente dadosCliente = this.service.save(cliente);
 		
-		return cliente.getIdCliente();
+		return dadosCliente.getIdCliente();
 	}
 	
 	/***
