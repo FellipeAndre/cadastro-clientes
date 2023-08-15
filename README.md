@@ -15,7 +15,7 @@ Sejam Bem vindos ao projeto de Cadastro de Clientes.
  regra da 1° e 2° Forma Normal, cada tabela com a sua estrutura e com seus Indentificadores, criação de relacionamento utilizando o
  ER para criaçãos do modelos, conceitual, lógico e fisico, DDL -> Para a modelagem , DML -> Para Manipulação do Dados.
 
- 3° Criação das Entidades -> Cliente, Endereço, Telefone e Cadastro_do_Cliente
+ 3° Criação das Entidades -> Cliente, Endereço e Telefone
 
  4° Criação dos Repositorys -> extendendo a Interface JPARepository 
 
