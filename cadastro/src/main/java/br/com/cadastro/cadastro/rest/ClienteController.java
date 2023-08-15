@@ -1,7 +1,5 @@
 package br.com.cadastro.cadastro.rest;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,11 +59,10 @@ public class ClienteController {
 	 */
 	
 	@GetMapping("/{id}")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	@ResponseStatus(value = HttpStatus.CREATED)
 	public Cliente findByCliente(@PathVariable Integer id) {
 		
-	Cliente clienteEncontrado = this.clientes.findById(id)
-			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	Cliente clienteEncontrado = this.service.findByIdCliente(id);
 	
 		return clienteEncontrado;
 	}

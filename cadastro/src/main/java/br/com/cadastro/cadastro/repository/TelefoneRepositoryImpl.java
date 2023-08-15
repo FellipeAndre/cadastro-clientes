@@ -1,6 +1,6 @@
 package br.com.cadastro.cadastro.repository;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 import br.com.cadastro.cadastro.entity.Telefone;
 
 @Repository
-public interface TelefoneRepositoryImpl extends JpaRepository<Telefone, Integer>{
+public interface TelefoneRepositoryImpl extends JpaRepository<Telefone, Integer> {
 
-	@Query(value = "select t.id_telefone, t.numero, t.tipo, t.id_cliente " + 
-			"from telefone t " + 
-			"where t.id_cliente = :id_cliente", nativeQuery = true)
-	public List<Telefone> buscarTelefoneClientePorId(@Param("id_cliente") Integer id);
-	
+	@Query(value = "select * from Telefone t " 
+	+ "inner join cliente c " 
+			+ "on t.id_cliente = c.id_cliente "
+			+ "and t.id_cliente = :id_cliente", nativeQuery = true)
+	public Optional<Telefone> findByIdCliente(@Param("id_cliente") Integer id);
+
 }

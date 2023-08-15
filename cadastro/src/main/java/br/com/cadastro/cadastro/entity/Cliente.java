@@ -37,11 +37,11 @@ public class Cliente {
     
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "id_endereco")
-    private Endereco idEndereco;
+    private Endereco pk_Endereco;
     
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "id_telefone")
-    private Telefone idTelefone;
+    private Telefone pk_Telefone;
 
 	@Override
 	public String toString() {

@@ -1,7 +1,8 @@
 package br.com.cadastro.cadastro.serviceImpl;
 
 import java.util.Objects;
-import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,20 +34,23 @@ public class ClienteServiceImpl implements ClienteService {
 	private TelefoneRepositoryImpl telefoneRepository;
 
 	@Override
+	@Transactional
 	public Cliente save(Cliente cliente) {
-
+		
 		Cliente clienteSalvo = new Cliente();
-		Endereco enderecoSalvo = this.enderecoRepository.save(cliente.getIdEndereco());
+		
+		clienteSalvo = this.repositoryCliente.save(cliente);
+		
+		Endereco enderecoSalvo = this.enderecoRepository.save(cliente.getPk_Endereco());
 
-		Telefone telSalvo = this.telefoneRepository.save(cliente.getIdTelefone());
+		Telefone telSalvo = this.telefoneRepository.save(cliente.getPk_Telefone());
 
 		if ((enderecoSalvo.getIdEndereco() != null || Objects.nonNull(enderecoSalvo))
 				&& (telSalvo.getIdTelefone() != null || Objects.nonNull(telSalvo))) {
 
-			cliente.setIdEndereco(enderecoSalvo);
-			cliente.setIdTelefone(telSalvo);
-
-			clienteSalvo = this.repositoryCliente.save(cliente);
+			cliente.setPk_Endereco(enderecoSalvo);
+			cliente.setPk_Telefone(telSalvo);
+			
 			this.salvarIdCliente(clienteSalvo);
 		}
 
@@ -57,28 +61,33 @@ public class ClienteServiceImpl implements ClienteService {
 
 		this.repositoryCliente.findById(cliente.getIdCliente()).map(c -> {
 
-			c.getIdEndereco().setId_Cliente(cliente);
-			c.getIdTelefone().setId_cliente(cliente);
+			c.getPk_Endereco().setId_Cliente(cliente);
+			c.getPk_Telefone().setId_cliente(cliente);
 
-			this.enderecoRepository.save(c.getIdEndereco());
-			this.telefoneRepository.save(c.getIdTelefone());
+			this.enderecoRepository.save(c.getPk_Endereco());
+			this.telefoneRepository.save(c.getPk_Telefone());
 
 			return cliente;
-		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		});
 	}
 
 	@Override
 	public Cliente findByIdCliente(Integer id) {
 
-		Optional<Cliente> buscarCliente = this.repositoryCliente.findById(id);
-		Cliente clienteEncontrado = null;
+	Cliente buscarDadosCliente = this.repositoryCliente.findById(id)
+			     .map(c ->{
+			    
+			    	 c.setPk_Endereco(this.enderecoRepository.findByIdCliente(id)
+			    			 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Endereço não encontrado")));
+			    	 
+			    	 c.setPk_Telefone(this.telefoneRepository.findByIdCliente(id)
+			    			  .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Telefone não encontrado")));
+			    	 
+			    	 return c;
+			     })
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));	
 
-		if (buscarCliente.isPresent()) {
-
-			clienteEncontrado = buscarCliente.get();
-		}
-
-		return clienteEncontrado;
+		return buscarDadosCliente;
 	}
 
 }
