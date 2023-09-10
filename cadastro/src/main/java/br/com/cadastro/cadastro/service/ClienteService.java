@@ -7,6 +7,8 @@ public interface ClienteService {
 	public Cliente findByIdCliente(Integer id);
 	
 	public Cliente save(Cliente cliente);
+	
+	public Cliente alterarCliente(Cliente cliente);
 
 
 }

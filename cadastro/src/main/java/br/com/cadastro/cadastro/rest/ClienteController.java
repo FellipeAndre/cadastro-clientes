@@ -2,6 +2,7 @@ package br.com.cadastro.cadastro.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,22 +80,22 @@ public class ClienteController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Cliente update(@RequestBody Cliente cliente) {
 		
-	Cliente  clienteAtualizado = this.clientes.findById(cliente.getIdCliente()).
-		map(clienteAtualizar ->{
-			
-			clienteAtualizar.setNome(cliente.getNome());
-			clienteAtualizar.setEmail(cliente.getEmail());
-			clienteAtualizar.setSexo(cliente.getSexo());
-			clienteAtualizar.setCpf(cliente.getCpf());
-			
-			this.clientes.save(clienteAtualizar);
-			
-			return clienteAtualizar;
-		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	Cliente clienteAtualizado = this.service.alterarCliente(cliente);
 	
 		return clienteAtualizado;
 	}
 	
 	
+	@DeleteMapping
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Integer id) {
+		  
+		this.clientes.findById(id)
+		      .map( clienteEncontrado -> {
+		    	  this.clientes.delete(clienteEncontrado);
+		    	  return clienteEncontrado;
+		    			  
+		      }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
 	
 }

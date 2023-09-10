@@ -1,6 +1,7 @@
 package br.com.cadastro.cadastro.serviceImpl;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -88,6 +89,53 @@ public class ClienteServiceImpl implements ClienteService {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));	
 
 		return buscarDadosCliente;
+	}
+
+	@Override
+	@Transactional
+	public Cliente alterarCliente(Cliente cliente) {
+		
+	Optional<Cliente> clienteAtualizado =	this.repositoryCliente.findById(cliente.getIdCliente())
+		.map(c -> { 
+		
+			alterarEnderecoCliente(c.getPk_Endereco());
+			
+			alterarTelefoneCliente(c.getPk_Telefone());
+			
+			return c;
+		});
+		
+		return clienteAtualizado.get();
+	}
+
+	private void alterarTelefoneCliente(Telefone idTelefone) {
+		
+		this.telefoneRepository.findById(idTelefone.getIdTelefone())
+		   .map(t -> {
+			   
+			   t.setNumero(idTelefone.getNumero());
+				t.setTipo(idTelefone.getTipo());
+				
+				this.telefoneRepository.save(t);
+				return t;
+		   });
+		
+	}
+
+	private void alterarEnderecoCliente(Endereco idEndereco) {
+	 
+		this.enderecoRepository.findById(idEndereco.getIdEndereco())
+		        .map(e -> {
+		        	
+		        	e.setRua(idEndereco.getRua());
+					e.setBairro(idEndereco.getBairro());
+					e.setCidade(idEndereco.getCidade());
+					e.setEstado(idEndereco.getEstado());
+					
+					this.enderecoRepository.save(e);
+					
+					return e;
+		        });	
 	}
 
 }
