@@ -24,6 +24,7 @@ public class ClienteController {
 	@Autowired
 	ClienteRepositoryImpl clientes;
 	
+	@Autowired
 	ClienteService service;
 
 	public ClienteController(ClienteRepositoryImpl repository, ClienteService service) {
@@ -77,7 +78,7 @@ public class ClienteController {
 	 * @return
 	 */
 	@PutMapping
-	@ResponseStatus(value = HttpStatus.CREATED)
+	@ResponseStatus(value = HttpStatus.OK)
 	public Cliente update(@RequestBody Cliente cliente) {
 		
 	Cliente clienteAtualizado = this.service.alterarCliente(cliente);

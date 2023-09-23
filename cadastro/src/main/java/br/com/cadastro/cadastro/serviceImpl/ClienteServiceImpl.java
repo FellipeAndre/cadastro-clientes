@@ -95,47 +95,49 @@ public class ClienteServiceImpl implements ClienteService {
 	@Transactional
 	public Cliente alterarCliente(Cliente cliente) {
 		
-	Optional<Cliente> clienteAtualizado =	this.repositoryCliente.findById(cliente.getIdCliente())
-		.map(c -> { 
+	Optional<Cliente> clienteAtualizado =	this.repositoryCliente.findById(cliente.getIdCliente());
 		
-			alterarEnderecoCliente(c.getPk_Endereco());
-			
-			alterarTelefoneCliente(c.getPk_Telefone());
-			
-			return c;
-		});
+	     if(clienteAtualizado.isPresent()) {
+	    	 
+	    	 alterarEnderecoCliente(cliente);	
+	 		alterarTelefoneCliente(cliente);
+	 		
+	     }	
 		
 		return clienteAtualizado.get();
 	}
 
-	private void alterarTelefoneCliente(Telefone idTelefone) {
+	private Telefone alterarTelefoneCliente(Cliente id) {
 		
-		this.telefoneRepository.findById(idTelefone.getIdTelefone())
+	Optional<Telefone> telefoneAtualizado =	this.telefoneRepository.findByIdCliente(id.getIdCliente())
 		   .map(t -> {
 			   
-			   t.setNumero(idTelefone.getNumero());
-				t.setTipo(idTelefone.getTipo());
+			   t.setNumero(id.getPk_Telefone().getNumero());
+				t.setTipo(id.getPk_Telefone().getTipo());
 				
 				this.telefoneRepository.save(t);
 				return t;
 		   });
 		
+	return telefoneAtualizado.get();
 	}
 
-	private void alterarEnderecoCliente(Endereco idEndereco) {
+	private Endereco alterarEnderecoCliente(Cliente id) {
 	 
-		this.enderecoRepository.findById(idEndereco.getIdEndereco())
+	Optional<Endereco> enderecoAtualizado =	this.enderecoRepository.findByIdCliente(id.getIdCliente())
 		        .map(e -> {
 		        	
-		        	e.setRua(idEndereco.getRua());
-					e.setBairro(idEndereco.getBairro());
-					e.setCidade(idEndereco.getCidade());
-					e.setEstado(idEndereco.getEstado());
+		        	e.setRua(id.getPk_Endereco().getRua());
+					e.setBairro(id.getPk_Endereco().getBairro());
+					e.setCidade(id.getPk_Endereco().getCidade());
+					e.setEstado(id.getPk_Endereco().getEstado());
 					
 					this.enderecoRepository.save(e);
 					
 					return e;
 		        });	
+	
+	return enderecoAtualizado.get();
 	}
 
 }
